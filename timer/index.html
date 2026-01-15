@@ -10,8 +10,10 @@
       background: #111;
       color: #fff;
       font-family: Arial, sans-serif;
+
       display: flex;
       flex-direction: column;
+      justify-content: center;
       align-items: center;
     }
 
@@ -25,14 +27,13 @@
     }
 
     #current-time {
-      margin-top: 120px;
       font-size: 24px;
-      opacity: 0.8;
+      opacity: 0.7;
+      margin-bottom: 30px;
     }
 
     #stopwatch {
-      margin-top: 120px;
-      font-size: 120px;
+      font-size: 140px;
       letter-spacing: 4px;
     }
 
@@ -41,12 +42,12 @@
     }
 
     .controls button {
-      padding: 12px 24px;
+      padding: 12px 26px;
       font-size: 16px;
-      margin: 0 10px;
-      cursor: pointer;
-      border-radius: 20px;
+      margin: 0 8px;
+      border-radius: 999px;
       border: none;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -81,39 +82,12 @@
     setInterval(updateClock, 1000);
 
     let startTime = 0;
-    let interval = null;
+    let timer = null;
 
     function start() {
-      if (interval) return;
+      if (timer) return;
       startTime = Date.now() - startTime;
-      interval = setInterval(() => {
+      timer = setInterval(() => {
         const diff = Date.now() - startTime;
         const min = String(Math.floor(diff / 60000)).padStart(2, '0');
-        const sec = String(Math.floor(diff / 1000) % 60).padStart(2, '0');
-        const ms = String(Math.floor(diff / 10) % 100).padStart(2, '0');
-        document.getElementById("stopwatch").textContent =
-          `${min}:${sec}.${ms}`;
-      }, 10);
-    }
-
-    function stop() {
-      if (!interval) return;
-      clearInterval(interval);
-      interval = null;
-      startTime = Date.now() - startTime;
-    }
-
-    function reset() {
-      clearInterval(interval);
-      interval = null;
-      startTime = 0;
-      document.getElementById("stopwatch").textContent = "00:00.00";
-    }
-
-    function goBack() {
-      location.href = "index.html";
-    }
-  </script>
-
-</body>
-</html>
+        con
