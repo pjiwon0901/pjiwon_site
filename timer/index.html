@@ -60,9 +60,9 @@
   <div id="stopwatch">00:00.00</div>
 
   <div class="controls">
-    <button onclick="start()">시작</button>
-    <button onclick="stop()">정지</button>
-    <button onclick="reset()">리셋</button>
+    <button onclick="startTimer()">시작</button>
+    <button onclick="stopTimer()">정지</button>
+    <button onclick="resetTimer()">리셋</button>
   </div>
 
   <script>
@@ -81,33 +81,39 @@
     updateClock();
     setInterval(updateClock, 1000);
 
-    let startTime = 0;
-    let timer = null;
+    let startTimestamp = null;
+    let elapsedTime = 0;
+    let timerInterval = null;
 
-    function start() {
-      if (timer) return;
-      startTime = Date.now() - startTime;
-      timer = setInterval(() => {
-        const diff = Date.now() - startTime;
+    function startTimer() {
+      if (timerInterval) return;
+
+      startTimestamp = Date.now();
+      timerInterval = setInterval(() => {
+        const diff = elapsedTime + (Date.now() - startTimestamp);
+
         const min = String(Math.floor(diff / 60000)).padStart(2, '0');
         const sec = String(Math.floor(diff / 1000) % 60).padStart(2, '0');
-        const ms = String(Math.floor(diff / 10) % 100).padStart(2, '0');
+        const ms  = String(Math.floor(diff / 10) % 100).padStart(2, '0');
+
         document.getElementById("stopwatch").textContent =
           `${min}:${sec}.${ms}`;
       }, 10);
     }
 
-    function stop() {
-      if (!timer) return;
-      clearInterval(timer);
-      timer = null;
-      startTime = Date.now() - startTime;
+    function stopTimer() {
+      if (!timerInterval) return;
+
+      elapsedTime += Date.now() - startTimestamp;
+      clearInterval(timerInterval);
+      timerInterval = null;
     }
 
-    function reset() {
-      clearInterval(timer);
-      timer = null;
-      startTime = 0;
+    function resetTimer() {
+      clearInterval(timerInterval);
+      timerInterval = null;
+      startTimestamp = null;
+      elapsedTime = 0;
       document.getElementById("stopwatch").textContent = "00:00.00";
     }
 
@@ -116,5 +122,5 @@
     }
   </script>
 
-  </body>
+</body>
 </html>
