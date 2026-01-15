@@ -1,23 +1,34 @@
 body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center; /* 가로 중앙 */
+  align-items: center;     /* 세로 중앙 */
   background: #111;
   color: white;
   font-family: Arial, sans-serif;
-  text-align: center;
-  padding-top: 100px;
-}
-
-#clock {
-  font-size: 48px;
-  margin: 20px 0;
-}
-
-button {
-  margin: 5px;
-  padding: 10px 20px;
-  cursor: pointer;
 }
 
 .login-box {
   width: 300px;
-  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-box h2 {
+  margin-bottom: 20px;
+}
+
+.login-box input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px; /* 버튼과 거리 */
+  box-sizing: border-box;
+}
+
+.login-box button {
+  width: 100%;
+  padding: 10px;
+  cursor: pointer;
 }
