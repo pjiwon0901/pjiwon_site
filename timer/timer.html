@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>타이머</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: #111;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #exit-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      font-size: 24px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    #current-time {
+      margin-top: 60px;
+      font-size: 24px;
+      opacity: 0.8;
+    }
+
+    #stopwatch {
+      margin-top: 80px;
+      font-size: 120px;
+      letter-spacing: 4px;
+    }
+
+    .controls {
+      margin-top: 40px;
+    }
+
+    .controls button {
+      padding: 12px 24px;
+      font-size: 16px;
+      margin: 0 10px;
+      cursor: pointer;
+      border-radius: 20px;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="exit-btn" onclick="goBack()">←</div>
+
+  <div id="current-time">00:00:00</div>
+
+  <div id="stopwatch">00:00.00</div>
+
+  <div class="controls">
+    <button onclick="start()">시작</button>
+    <button onclick="stop()">정지</button>
+    <button onclick="reset()">리셋</button>
+  </div>
+
+  <script>
+    function updateClock() {
+      const now = new Date();
+      const time = new Intl.DateTimeFormat('ko-KR', {
+        timeZone: 'Asia/Seoul',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+      }).format(now);
+      document.getElementById("current-time").textContent = time;
+    }
+
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    let startTime = 0;
+    let interval = null;
+
+    function start() {
+      if (interval) return;
+      startTime = Date.now() - startTime;
+      interval = setInterval(() => {
+        const diff = Date.now() - startTime;
+        const min = String(Math.floor(diff / 60000)).padStart(2, '0');
+        const sec = String(Math.floor(diff / 1000) % 60).padStart(2, '0');
+        const ms = String(Math.floor(diff / 10) % 100).padStart(2, '0');
+        document.getElementById("stopwatch").textContent =
+          `${min}:${sec}.${ms}`;
+      }, 10);
+    }
+
+    function stop() {
+      if (!interval) return;
+      clearInterval(interval);
+      interval = null;
+      startTime = Date.now() - startTime;
+    }
+
+    function reset() {
+      clearInterval(interval);
+      interval = null;
+      startTime = 0;
+      document.getElementById("stopwatch").textContent = "00:00.00";
+    }
+
+    function goBack() {
+      location.href = "index.html";
+    }
+  </script>
+
+</body>
+</html>
