@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>timer</title></title>
+  <title>타이머</title></title>
   <style>
     body {
       margin: 0;
@@ -10,25 +10,60 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: #111;
-      color: #fff;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
       font-family: Arial, sans-serif;
     }
 
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+    }
+
     #timer {
+      position: relative;
+      z-index: 1;
       font-size: 64px;
+      color: #fff;
       letter-spacing: 2px;
+      text-shadow: 0 0 10px rgba(0,0,0,0.8),
+                   0 0 20px rgba(0,0,0,0.6);
+    }
+
+    .bg-control {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 2;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    input[type="file"] {
+      display: none;
     }
   </style>
 </head>
 <body>
 
+  <div class="overlay"></div>
   <div id="timer">00:00:00</div>
+
+  <label class="bg-control">
+    배경 변경
+    <input type="file" id="bgInput" accept="image/*">
+  </label>
 
   <script>
     function updateTimer() {
       const now = new Date();
-
       const kstTime = new Intl.DateTimeFormat('ko-KR', {
         timeZone: 'Asia/Seoul',
         hour: '2-digit',
@@ -42,6 +77,13 @@
 
     updateTimer();
     setInterval(updateTimer, 1000);
+
+    document.getElementById('bgInput').addEventListener('change', function (e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const imageURL = URL.createObjectURL(file);
+      document.body.style.backgroundImage = `url(${imageURL})`;
+    });
   </script>
 
 </body>
