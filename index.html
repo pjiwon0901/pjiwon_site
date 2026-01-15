@@ -2,47 +2,17 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>KST 실시간 타이머</title>
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: #111;
-      color: #fff;
-      font-family: Arial, sans-serif;
-    }
-
-    #timer {
-      font-size: 64px;
-      letter-spacing: 2px;
-    }
-  </style>
+  <title>로그인</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <div id="timer">00:00:00</div>
+  <div class="login-box">
+    <h2>로그인</h2>
+    <input id="username" placeholder="아이디">
+    <button onclick="login()">로그인</button>
+  </div>
 
-  <script>
-    function updateTimer() {
-      const now = new Date();
-
-      const kstTime = new Intl.DateTimeFormat('ko-KR', {
-        timeZone: 'Asia/Seoul',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: false
-      }).format(now);
-
-      document.getElementById('timer').textContent = kstTime;
-    }
-
-    updateTimer();
-    setInterval(updateTimer, 1000);
-  </script>
-
+  <script src="js/auth.js"></script>
 </body>
 </html>
