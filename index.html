@@ -17,20 +17,21 @@
 
     #timer {
       font-size: 360px;
-      letter-spacing: 2px;
-    
+      letter-spacing: 4px;
+    }
+
     #menu-btn {
-      position: absolute;
+      position: fixed;
       top: 20px;
       left: 20px;
       font-size: 32px;
       cursor: pointer;
       user-select: none;
     }
-    
+
     #top-bar {
       position: fixed;
-      top: -80px;               
+      top: -80px;
       left: 0;
       width: 100%;
       height: 80px;
@@ -40,27 +41,31 @@
       align-items: center;
       transition: top 0.3s ease;
     }
-    
+
     #top-bar.open {
       top: 0;
     }
-    
+
     #top-bar button {
       padding: 10px 20px;
       font-size: 16px;
       cursor: pointer;
     }
-    
   </style>
 </head>
 <body>
+
+  <div id="top-bar">
+    <button onclick="goTimer()">타이머</button>
+  </div>
+
+  <div id="menu-btn" onclick="toggleMenu()">☰</div>
 
   <div id="timer">00:00:00</div>
 
   <script>
     function updateTimer() {
       const now = new Date();
-
       const kstTime = new Intl.DateTimeFormat('ko-KR', {
         timeZone: 'Asia/Seoul',
         hour: '2-digit',
@@ -83,14 +88,6 @@
       location.href = "timer.html";
     }
   </script>
-  
-<div id="top-bar">
-  <button onclick="goTimer()">타이머</button>
-</div>
-
-<div id="menu-btn" onclick="toggleMenu()">☰</div>
-  
-<div id="timer">00:00:00</div>
 
 </body>
 </html>
