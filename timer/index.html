@@ -90,4 +90,31 @@
       timer = setInterval(() => {
         const diff = Date.now() - startTime;
         const min = String(Math.floor(diff / 60000)).padStart(2, '0');
-        con
+        const sec = String(Math.floor(diff / 1000) % 60).padStart(2, '0');
+        const ms = String(Math.floor(diff / 10) % 100).padStart(2, '0');
+        document.getElementById("stopwatch").textContent =
+          `${min}:${sec}.${ms}`;
+      }, 10);
+    }
+
+    function stop() {
+      if (!timer) return;
+      clearInterval(timer);
+      timer = null;
+      startTime = Date.now() - startTime;
+    }
+
+    function reset() {
+      clearInterval(timer);
+      timer = null;
+      startTime = 0;
+      document.getElementById("stopwatch").textContent = "00:00.00";
+    }
+
+    function goBack() {
+      location.href = "/";
+    }
+  </script>
+
+  </body>
+</html>
