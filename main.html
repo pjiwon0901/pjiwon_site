@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>메인</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <h2 id="welcome"></h2>
+  <div id="clock">00:00:00</div>
+
+  <div class="timer">
+    <div id="stopwatch">00:00.00</div>
+    <button onclick="start()">시작</button>
+    <button onclick="stop()">정지</button>
+    <button onclick="reset()">리셋</button>
+  </div>
+
+  <h3>기록</h3>
+  <ul id="records"></ul>
+
+  <script src="js/clock.js"></script>
+  <script src="js/timer.js"></script>
+</body>
+</html>
