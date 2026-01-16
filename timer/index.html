@@ -21,30 +21,30 @@
       position: fixed;
       top: 20px;
       left: 20px;
-      font-size: 24px;
+      font-size: clamp(20px, 6vw, 24px);
       cursor: pointer;
       user-select: none;
     }
 
     #current-time {
-      font-size: 24px;
+      font-size: clamp(14px, 4vw, 24px);
       opacity: 0.7;
-      margin-bottom: 30px;
+      margin-bottom: 4vh;
     }
 
     #stopwatch {
-      font-size: 140px;
+      font-size: clamp(64px, 18vw, 140px);
       letter-spacing: 4px;
     }
 
     .controls {
-      margin-top: 40px;
+      margin-top: 5vh;
     }
 
     .controls button {
-      padding: 12px 26px;
-      font-size: 16px;
-      margin: 0 8px;
+      padding: 0.8rem 1.6rem;
+      font-size: clamp(14px, 4vw, 16px);
+      margin: 0 0.5rem;
       border-radius: 999px;
       border: none;
       cursor: pointer;
